@@ -162,6 +162,15 @@ function baseConfig({ target = isProduction ? 'umd' : 'umddir' } = {}) {
             return externals.some(isPeerDep) ? cb(null, request) : cb();
           },
     stats: stats(),
+    
+    optimization: isProduction ? {
+      moduleIds: 'deterministic',
+      minimize: true,
+      removeAvailableModules: true,
+      usedExports: true,
+      concatenateModules: true,
+      runtimeChunk: false,
+    } : {},
   };
 }
 
